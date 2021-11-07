@@ -15,7 +15,7 @@ namespace CalculatorBetter
             String noMultiplicationEquation;
             String noAdditionEquation;
             String noSubtractionEquation;
-            
+
             for (int i = 0; i < equationArr.Length; i++)
             {
                 if (equationArr[i].ToString().Equals("("))
@@ -27,8 +27,8 @@ namespace CalculatorBetter
                         {
                             j--;
                         }
-                        int len = j - (i+1);
-                        String bracketedEquation = equation.Substring(i+1, len);
+                        int len = j - (i + 1);
+                        String bracketedEquation = equation.Substring(i + 1, len);
                         String bracketedResult = Sum(bracketedEquation);
                         String temp1 = equation.Substring(0, i);
                         int lenSecondPart = equation.Length - j;
@@ -131,13 +131,13 @@ namespace CalculatorBetter
                         {
                             temp1 = equation.Substring(0, k);
                         }
-                        
-                        if(!(j == equation.Length - 1))
+
+                        if (!(j == equation.Length - 1))
                         {
-                            int len = equation.Length - (j + 1);
+                            int len = equation.Length - (j);
                             temp2 = equation.Substring(j, len);
                         }
-                        
+
                         noAdditionEquation = temp1 + addedResult + temp2;
                         equationArr = noAdditionEquation.ToCharArray();
                         equation = new string(equationArr);
@@ -184,18 +184,19 @@ namespace CalculatorBetter
         private String CleanUpBrackets(String equation)
         {
             char[] equationArr = equation.ToCharArray();
-            for(int i = 0; i < equationArr.Length; i++)
+            for (int i = 0; i < equationArr.Length; i++)
             {
                 String temp = equationArr[i].ToString();
-                if (temp.Equals("(")){
-                    
+                if (temp.Equals("("))
+                {
+
                     try
                     {
                         String prev = equationArr[i - 1].ToString();
                         double x = double.Parse(prev);
                         String temp1 = equation.Substring(0, i);
                         String temp2 = null;
-                        if(i == equation.Length - 1)
+                        if (i == equation.Length - 1)
                         {
                             temp2 = equationArr[i].ToString();
                         }
@@ -207,18 +208,20 @@ namespace CalculatorBetter
                         String cleanEquation = temp1 + "x" + temp2;
                         equation = cleanEquation;
                         i = i + 2;
-                    }catch(Exception e)
+                    }
+                    catch (Exception e)
                     {
 
                     }
                 }
-                if (temp.Equals(")")){
-                    
-                    try 
+                if (temp.Equals(")"))
+                {
+
+                    try
                     {
                         String next = equationArr[i + 1].ToString();
                         double x = double.Parse(next);
-                        String temp1 = equation.Substring(0, i+1);
+                        String temp1 = equation.Substring(0, i + 1);
                         String temp2 = null;
                         if (i + 1 == equation.Length - 1)
                         {
@@ -226,17 +229,18 @@ namespace CalculatorBetter
                         }
                         else
                         {
-                            int len = equation.Length - (i+1);
+                            int len = equation.Length - (i + 1);
                             temp2 = equation.Substring(i + 1, len);
                         }
                         String cleanEquation = temp1 + "x" + temp2;
                         equation = cleanEquation;
                         i++;
-                    }catch(Exception e)
+                    }
+                    catch (Exception e)
                     {
 
                     }
-                    
+
                 }
             }
             return equation;
@@ -257,6 +261,7 @@ namespace CalculatorBetter
             double secondNumber = double.Parse(secondNumberString);
             double result = firstNumber / secondNumber;
             String resultString = result.ToString();
+            resultString = NForm(resultString);
             return resultString;
         }
 
@@ -268,6 +273,7 @@ namespace CalculatorBetter
             double secondNumber = double.Parse(secondNumberString);
             double result = firstNumber * secondNumber;
             String resultString = result.ToString();
+            resultString = NForm(resultString);
             return resultString;
         }
 
@@ -279,6 +285,7 @@ namespace CalculatorBetter
             double secondNumber = double.Parse(secondNumberString);
             double result = firstNumber + secondNumber;
             String resultString = result.ToString();
+            resultString = NForm(resultString);
             return resultString;
         }
 
@@ -294,6 +301,7 @@ namespace CalculatorBetter
             double secondNumber = double.Parse(secondNumberString);
             double result = firstNumber - secondNumber;
             String resultString = result.ToString();
+            resultString = NForm(resultString);
             return resultString;
         }
 
@@ -311,7 +319,7 @@ namespace CalculatorBetter
                     int k = int.Parse(temp);
                     firstNumberString = firstNumberString + temp;
                     if (!(x == 0)) { isNumber = true; }
-                    
+
                     x--;
                 }
                 catch (Exception ex)
@@ -320,6 +328,12 @@ namespace CalculatorBetter
                     if (temp.Equals("."))
                     {
                         firstNumberString = firstNumberString + temp;
+                        if (!(x == 0)) { isNumber = true; }
+                        x--;
+                    }
+                    if (temp.Equals("n"))
+                    {
+                        firstNumberString = firstNumberString + "-";
                         if (!(x == 0)) { isNumber = true; }
                         x--;
                     }
@@ -341,8 +355,8 @@ namespace CalculatorBetter
                     String temp = equationArr[x].ToString();
                     int k = int.Parse(temp);
                     secondNumberString = secondNumberString + temp;
-                    if(!(x == equation.Length - 1)) { isNumber = true; }
-                    
+                    if (!(x == equation.Length - 1)) { isNumber = true; }
+
                     x++;
                 }
                 catch (Exception ex)
@@ -352,6 +366,12 @@ namespace CalculatorBetter
                     {
                         secondNumberString = secondNumberString + temp;
                         isNumber = true;
+                        x++;
+                    }
+                    if (temp.Equals("n"))
+                    {
+                        secondNumberString = secondNumberString + "-";
+                        if (!(x == equation.Length - 1)) { isNumber = true; }
                         x++;
                     }
                 }
@@ -374,7 +394,7 @@ namespace CalculatorBetter
                     int k = int.Parse(temp);
                     firstNumberString = firstNumberString + temp;
                     isNumber = true;
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -383,7 +403,7 @@ namespace CalculatorBetter
                     {
                         firstNumberString = firstNumberString + temp;
                         isNumber = true;
-                        
+
                     }
                 }
             }
@@ -395,7 +415,7 @@ namespace CalculatorBetter
             int x = i + 1;
             Boolean isNumber = true;
             String secondNumberString = "";
-            while (isNumber && x < equationArr.Length-1) 
+            while (isNumber && x < equationArr.Length - 1)
             {
                 x++;
                 isNumber = false;
@@ -405,7 +425,7 @@ namespace CalculatorBetter
                     int k = int.Parse(temp);
                     secondNumberString = secondNumberString + temp;
                     isNumber = true;
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -414,11 +434,44 @@ namespace CalculatorBetter
                     {
                         secondNumberString = secondNumberString + temp;
                         isNumber = true;
-                        
+
                     }
                 }
             }
             return x;
+        }
+
+        private String NForm(String number)
+        {
+            String result = "";
+            char[] temp = number.ToCharArray();
+            for (int i = 0; i < temp.Length; i++)
+            {
+                if (temp[i].Equals('-'))
+                {
+                    temp[i] = 'n';
+                    
+                }
+                result = result + temp[i].ToString();
+            }
+            return result;
+        }
+
+        public String RealForm(String number)
+        {
+            String result = "";
+            char[] temp = number.ToCharArray();
+            for (int i = 0; i < temp.Length; i++)
+            {
+                if (temp[i].Equals('n'))
+                {
+                    temp[i] = '-';
+                    
+
+                }
+                result = result + temp[i].ToString();
+            }
+            return result;
         }
     }
 }

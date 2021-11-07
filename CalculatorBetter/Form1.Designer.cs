@@ -50,6 +50,7 @@ namespace CalculatorBetter
             this.equals = new System.Windows.Forms.Button();
             this.leftBracket = new System.Windows.Forms.Button();
             this.rightBracket = new System.Windows.Forms.Button();
+            this.userDisplay = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Display
@@ -261,11 +262,20 @@ namespace CalculatorBetter
             this.rightBracket.UseVisualStyleBackColor = true;
             this.rightBracket.Click += new System.EventHandler(this.rightBracket_Click);
             // 
+            // userDisplay
+            // 
+            this.userDisplay.AutoSize = true;
+            this.userDisplay.Location = new System.Drawing.Point(59, 87);
+            this.userDisplay.Name = "userDisplay";
+            this.userDisplay.Size = new System.Drawing.Size(0, 15);
+            this.userDisplay.TabIndex = 21;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.userDisplay);
             this.Controls.Add(this.rightBracket);
             this.Controls.Add(this.leftBracket);
             this.Controls.Add(this.equals);
@@ -317,6 +327,7 @@ namespace CalculatorBetter
         private System.Windows.Forms.Button equals;
         private System.Windows.Forms.Button leftBracket;
         private System.Windows.Forms.Button rightBracket;
+        private System.Windows.Forms.Label userDisplay;
     }
 }
 
